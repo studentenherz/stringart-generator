@@ -74,7 +74,6 @@ function handleImageFile(file) {
   reader.onload = (e) => {
     currentFileData = new Uint8Array(e.target.result);
     displayOriginalImage(file);
-    generateStringArt();
   };
   reader.readAsArrayBuffer(file);
 }

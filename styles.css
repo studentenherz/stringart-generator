@@ -6,7 +6,6 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f5f5f5;
   min-height: 100vh;
   padding: 20px;
   color: #333;
@@ -189,11 +188,12 @@ body {
 }
 
 .controls-container {
-  background: #fafafa;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  margin-top: 30px;
   padding: 20px;
-  height: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
 }
 
 .controls-title {
@@ -201,13 +201,6 @@ body {
   color: #333;
   margin-bottom: 15px;
   font-weight: 500;
-}
-
-.parameters-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 15px;
 }
 
 .parameter-group {
@@ -306,4 +299,58 @@ body {
   .main-content {
     padding: 20px;
   }
+}
+
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip-icon {
+  display: inline-block;
+  background-color: #0077cc;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  text-align: center;
+  user-select: none;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 30ch;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 8px;
+  border-radius: 6px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+/* Little arrow below tooltip */
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
