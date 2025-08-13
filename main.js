@@ -14,6 +14,7 @@ async function initWasm() {
 const uploadArea = document.getElementById("uploadArea");
 const fileInput = document.getElementById("fileInput");
 const generateButton = document.getElementById("generateButton");
+const downloadButton = document.getElementById("downloadButton");
 const originalImage = document.getElementById("originalImage");
 const stringartSvg = document.getElementById("stringartSvg");
 const stringartPlaceholder = document.getElementById("stringartPlaceholder");
@@ -64,6 +65,22 @@ fileInput.addEventListener("change", (e) => {
 // Generate button click
 generateButton.addEventListener("click", generateStringArt);
 
+// Download button click
+downloadButton.addEventListener("click", downloadStringArtSVG);
+
+function downloadStringArtSVG() {
+  const svgData = stringartSvg.outerHTML;
+  const preface = '<?xml version="1.0" standalone="no"?>\r\n';
+  const svgBlob = new Blob([preface, svgData], {
+    type: "image/svg+xml;charset=utf-8",
+  });
+  const svgUrl = URL.createObjectURL(svgBlob);
+  const downloadLink = document.createElement("a");
+  downloadLink.href = svgUrl;
+  downloadLink.download = "stringart.svg";
+  downloadLink.click();
+}
+
 // Style control changes
 colorPicker.addEventListener("change", updateStringArtStyle);
 thicknessInput.addEventListener("input", updateStringArtStyle);
@@ -100,6 +117,7 @@ async function generateStringArt() {
   }
 
   generateButton.disabled = true;
+  downloadButton.disabled = true;
   loadingOverlay.classList.add("active");
 
   try {
@@ -118,6 +136,7 @@ async function generateStringArt() {
         );
 
         displayStringArt();
+        downloadButton.disabled = false;
       } catch (error) {
         console.error("Error generating string art:", error);
         alert(
