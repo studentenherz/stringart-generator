@@ -164,12 +164,15 @@ function displayStringArt() {
   // Get image dimensions to set SVG viewBox
   const imgNaturalWidth = originalImage.naturalWidth;
   const imgNaturalHeight = originalImage.naturalHeight;
+  const canvasSize = Math.min(imgNaturalWidth, imgNaturalHeight);
+  const xMin = (imgNaturalWidth - canvasSize) / 2;
+  const yMin = (imgNaturalHeight - canvasSize) / 2;
 
   // Create SVG
   stringartSvg.innerHTML = "";
   stringartSvg.setAttribute(
     "viewBox",
-    `0 0 ${imgNaturalWidth} ${imgNaturalHeight}`,
+    `${xMin} ${yMin} ${canvasSize} ${canvasSize} `,
   );
   stringartSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
